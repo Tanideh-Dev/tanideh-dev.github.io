@@ -21,7 +21,6 @@ Learn more at the [Tanideh Project Website](https://tanideh-dev.github.io/Tanide
 flowchart LR
   %% Tanideh – Vote Dissemination in a Fully Connected Mesh (K99)
 
-  %% === Client Mesh (conceptual slice of K99) ===
   subgraph M["Client Mesh - Complete Graph (K99)"]
     direction LR
     C1((C1))
@@ -30,7 +29,6 @@ flowchart LR
     C4((C4))
     C5((C5))
     Cx((... more))
-    %% sample connections
     C1 --- C2
     C1 --- C3
     C1 --- C4
@@ -43,35 +41,30 @@ flowchart LR
     C4 --- C5
   end
 
-  %% === Vote dissemination to a subset of peers ===
   C1 -. "subset of peers" .-> C2
   C1 -. "subset of peers" .-> C3
   C1 -. "subset of peers" .-> C4
 
-  %% === Validation (EdDSA ed448) at recipients ===
   V["Local Validation: EdDSA (ed448)"]
   C2 -->|"vote + signature"| V
   C3 -->|"vote + signature"| V
   C4 -->|"vote + signature"| V
 
-  %% === Controlled epidemic / gossip echo ===
   G["Gossip Engine: Controlled Epidemic"]
   V -->|"valid"| G
 
-  %% === Damping to prevent duplication/flooding ===
   D["Damping Coefficient - prevents duplication & flooding"]
   G -->|"echo"| D
   D -. "throttles" .- G
 
-  %% === Echo back into the mesh (damped) ===
   D -. "echo (damped)" .-> C5
   D -. "echo (damped)" .-> Cx
 
-  %% === Styling ===
-  classDef client fill:#eef,stroke:#336,stroke-width:1px,color:#111;
-  classDef process fill:#efe,stroke:#363,stroke-width:1px,color:#111;
-  classDef engine fill:#ffe,stroke:#663,stroke-width:1px,color:#111;
-  classDef control fill:#fee,stroke:#933,stroke-width:1px,color:#111;
+  %% === Styling for white background with dark text/lines ===
+  classDef client fill:#fff,stroke:#000,stroke-width:1px,color:#000;
+  classDef process fill:#fff,stroke:#000,stroke-width:1px,color:#000;
+  classDef engine fill:#fff,stroke:#000,stroke-width:1px,color:#000;
+  classDef control fill:#fff,stroke:#000,stroke-width:1px,color:#000;
 
   class C1,C2,C3,C4,C5,Cx client
   class V process
