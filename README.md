@@ -15,11 +15,19 @@ to the main project page:
 Learn more at the [Tanideh Project Website](https://tanideh-dev.github.io/Tanideh).
 ------------------------------------------------------------------
 
-```mermaid
-flowchart TD
-    A[Vote Cast] --> B[Validation: signature, timestamp, uniqueness]
-    B --> C[Echo: controlled gossip]
-    C --> D[Expiration or Renewal]
+\begin{tikzpicture}[node distance=2cm, auto]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text centered, rounded corners, minimum height=1.5em]
+\tikzstyle{line} = [draw, -latex']
+
+\node [block] (cast) {Vote Cast};
+\node [block, below of=cast] (validate) {Validation (Signature, Timestamp, Uniqueness)};
+\node [block, below of=validate] (echo) {Echo (Controlled Gossip)};
+\node [block, below of=echo] (expire) {Expiration / Renewal};
+
+\path [line] (cast) -- (validate);
+\path [line] (validate) -- (echo);
+\path [line] (echo) -- (expire);
+\end{tikzpicture}
 
 
 
