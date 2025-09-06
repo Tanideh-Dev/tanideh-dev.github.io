@@ -22,15 +22,15 @@ flowchart LR
   %% Tanideh – Vote Dissemination in a Fully Connected Mesh (K99)
 
   %% === Client Mesh (conceptual slice of K99) ===
-  subgraph M[Client Mesh — Complete Graph (K99)]
+  subgraph M["Client Mesh - Complete Graph (K99)"]
     direction LR
-    C1((C₁))
-    C2((C₂))
-    C3((C₃))
-    C4((C₄))
-    C5((C₅))
-    Cx((… 94 more))
-    %% show completeness on sample
+    C1((C1))
+    C2((C2))
+    C3((C3))
+    C4((C4))
+    C5((C5))
+    Cx((... more))
+    %% sample connections
     C1 --- C2
     C1 --- C3
     C1 --- C4
@@ -44,24 +44,24 @@ flowchart LR
   end
 
   %% === Vote dissemination to a subset of peers ===
-  C1 -. subset of peers .-> C2
-  C1 -. subset of peers .-> C3
-  C1 -. subset of peers .-> C4
+  C1 -. "subset of peers" .-> C2
+  C1 -. "subset of peers" .-> C3
+  C1 -. "subset of peers" .-> C4
 
   %% === Validation (EdDSA ed448) at recipients ===
-  V([Local Validation<br/>EdDSA (ed448)])
+  V["Local Validation: EdDSA (ed448)"]
   C2 -->|"vote + signature"| V
   C3 -->|"vote + signature"| V
   C4 -->|"vote + signature"| V
 
   %% === Controlled epidemic / gossip echo ===
-  G[[Gossip Engine<br/>Controlled Epidemic<br/>(Eugster et&nbsp;al., 2004)]]
-  V -->|"valid ✔"| G
+  G["Gossip Engine: Controlled Epidemic"]
+  V -->|"valid"| G
 
   %% === Damping to prevent duplication/flooding ===
-  D{{Damping Coefficient β<br/>prevents duplication & flooding}}
-  G -->|"echo (damped)"| D
-  D -. throttles .- G
+  D["Damping Coefficient - prevents duplication & flooding"]
+  G -->|"echo"| D
+  D -. "throttles" .- G
 
   %% === Echo back into the mesh (damped) ===
   D -. "echo (damped)" .-> C5
