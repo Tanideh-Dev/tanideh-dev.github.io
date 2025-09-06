@@ -21,6 +21,5 @@ flowchart TD
     B --> C[Echo: controlled gossip]
     C --> D[Expiration or Renewal]
 
-------------------------------------------------------------------
 
 
